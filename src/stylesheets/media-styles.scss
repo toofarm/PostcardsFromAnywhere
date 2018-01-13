@@ -1,0 +1,127 @@
+@media screen and (min-width: 1025px)  and (max-width: 1300px) {
+    
+    .ui-column {
+        padding-left: 50px !important;
+    }
+    
+}
+
+/////////////////
+///TABLET
+/////////////////
+
+@media screen and (min-width: 768px)  and (max-width: 1024px) {
+    
+    #head-container {
+        nav {
+            h1 {
+                font-size: 18px;
+            }
+            ul {
+                top: 40%;
+                right: 30px;
+                li {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+        
+    .intro-container {
+        .intro-message {
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 75%;
+        }
+    }
+    
+    .canvas-shell {
+        .canvas {
+            position: relative !important;
+            margin: 0 auto;
+        }
+        .canvas2 {
+            margin: 0 auto 35px auto;
+        }
+    }
+    
+}
+
+/////////////////
+///HANDHELD
+/////////////////
+
+
+@media screen and (max-width: 767px) {
+    
+        ///NAV
+    #head-container {
+    nav {
+        height: 65px;
+        h1 {
+            display: none;
+        }
+        h2 {
+            display: inline-block;
+        }
+        ul {
+            right: 0;
+            li {
+                font-size: 17px;
+            }
+        }
+    }
+    }
+    
+    ///MODAL
+    .modal-title {
+        font-size: 33px;
+    }
+    
+    .modal-body {
+        font-size: 17px;
+        h4 {
+            font-size: 25px;
+            text-align: center;
+        }
+        .credit {
+            font-size: 15px;
+        }
+    }
+    
+    .modal-footer {
+        .btn {
+            font-size: 15px;
+        }
+    }
+    
+        ////INTRO MESSAGE
+    .intro-container {
+        margin-top: 65px;
+        height: 135vh;
+            .intro-message {
+                display: none;
+            }
+            .intro-message-mob {
+                display: block;
+                left: 50%;
+                top: 5%;
+                transform: translate(-50%, 0);
+                width: 75%;
+                background-color: rgba(204, 204, 204, 0.4);
+                padding: 10px;
+                ul {
+                    li {
+                        font-size: 15px;
+                        color: #333;
+                    }
+                }
+            }
+    }
+    
+    .intro-txt {
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+}
