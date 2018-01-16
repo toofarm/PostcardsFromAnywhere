@@ -15,7 +15,6 @@ export default class StepTwo extends React.Component {
             headlineText: '',
             headlineFont: 'Helvetica',
             headlineColor: 'White',
-            headlinePosition: 'Middle',
             headlineLength: 0,
             revealNum: 2
         }
@@ -52,22 +51,7 @@ export default class StepTwo extends React.Component {
             
         this.setState({
                headlineLength: document.getElementById('headline').value.length
-           }) 
-        
-        if (this.state.headlineLength > 13) {
-            
-            this.setState({
-                headlinePosition: "Middle"
-            }, this.writeHeadlineChild)
-            
-            
-        } else {
-            
-            let position = document.getElementById('position');
-            
-            position.click();
-            
-        }
+           })
             
     }
 
@@ -89,15 +73,6 @@ export default class StepTwo extends React.Component {
         
     }
     
-    updatePosition(e) {
-        
-        const { value } = e.target;
-        
-        this.setState({
-            headlinePosition: value
-        }, this.writeHeadlineChild)
-        
-    }
 
     writeHeadlineChild() {
         this.props.headWriter(this.state.headlineText, this.state.headlineFont, this.state.headlineColor, this.state.headlinePosition);
@@ -125,7 +100,7 @@ export default class StepTwo extends React.Component {
             <
             div className = "instructions" >
             Make a message
-            for the front of your postcard(75 characters or less, pls) <
+            for the front of your postcard (75 characters or less, pls) <
             /div>
 
             <
@@ -189,26 +164,13 @@ export default class StepTwo extends React.Component {
                 <option>Purple</option>
                 </select>
             </div> 
-            <div className = {
-                this.state.headlineLength > 12 ? "form-group position-null" : "form-group"
-                }>
+            <div className = "form-group">
                 <label htmlFor="position" className="form-label">Position</label>
-                <select className="form-control"
-                id="position"
-                //Calling onInput and onClick allows both Firefox and Chrome to handle the event
-                onClick = {
-                    evt => this.updatePosition(evt)
-                } 
-
-                onInput = {
-                    evt => this.updatePosition(evt)
-                } 
-                >
-                    <option>Middle</option>
-                    <option>Top</option>
-                    <option>Bottom</option>
-                </select>
+                <div className="instructions position-txt">
+                    Click and drag to position your message on the postcard
+                </div>
             </div>
+            <div className="form-group">
             <button className={this.state.headlineLength < 1 ? "card-form-btn-inactive" : "card-form-btn-active"}
             onClick={ (e) => {
                     this.nextStep(e)
@@ -216,6 +178,7 @@ export default class StepTwo extends React.Component {
             }>
             Choose message 
             </button>
+            </div>
             </form>
 
             </div>

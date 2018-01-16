@@ -8,6 +8,7 @@ import StepFour from './StepFour'
 import EndModal from './EndModal'
 import axios from 'axios'
 import domtoimage from 'dom-to-image'
+import Draggable, {DraggableCore} from 'react-draggable'
 
 export default class CardBuilder extends React.Component {
     
@@ -194,14 +195,7 @@ export default class CardBuilder extends React.Component {
     
     // Write text to front of card
     writeHeadline(t, f, c, p) {
-                
-                if ( p === "Top" ) {
-                    p = "-230%";
-                } else if ( p === "Bottom" ) {
-                    p = "120%";
-                } else {
-                    p = "-50%";
-                }
+
 
                 var headline = document.querySelector('.headline');
 
@@ -209,7 +203,6 @@ export default class CardBuilder extends React.Component {
                     headline.innerHTML = t;
                     headline.style.fontFamily = f;
                     headline.style.color = c;
-                    headline.style.transform = "translate(-50%," + p + ")";
                 }
 
                 headlinePreview();
@@ -338,10 +331,12 @@ export default class CardBuilder extends React.Component {
                         <canvas id="card-maker">
 
                         </canvas>
+                        <Draggable>
                         <div id="headline-uber-holder">
                             <div className="headline" id="headline-holder">
                             </div>
                         </div>
+                        </Draggable>
                     </div>
                     <div className="spacer"></div>
                     <div id="back-maker-holder" className="canvas2" style={{"display": 
