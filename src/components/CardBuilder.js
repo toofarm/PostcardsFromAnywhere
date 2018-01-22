@@ -24,6 +24,7 @@ export default class CardBuilder extends React.Component {
             showEndModal: false
         }
         
+        this.makeCardDefault = this.makeCardDefault.bind(this);
         this.getLocation = this.getLocation.bind(this);
         this.addStep = this.addStep.bind(this);
         this.addStepThree = this.addStepThree.bind(this);
@@ -38,9 +39,11 @@ export default class CardBuilder extends React.Component {
     
     }
     
-    componentDidMount = () => {
+    makeCardDefault() {
         
         var self = this;
+        
+        document.getElementById('headline-holder').innerHTML = '';
         
         var canvas = document.querySelector('#card-maker');
         var ctx = canvas.getContext('2d');
@@ -88,6 +91,14 @@ export default class CardBuilder extends React.Component {
         
     }
     
+    componentDidMount = () => {
+        
+        var self = this;
+        
+        self.makeCardDefault();
+        
+    }
+    
     // Handle accordian behavior
     addStep(s) {
         
@@ -132,20 +143,31 @@ export default class CardBuilder extends React.Component {
         
     }
 
-    //Open end modal
+    //Toggle end modal
     toggleEndModal(s, r, h) {
             
         var self = this;
+        
+        if (self.state.showEndModal === false) {
 
-        self.setState({
-                showEndModal: s,
-                stepReveal: r,
-                stepHider: h
-            }, () => {
-                document.getElementById('location').focus();
-            });
-        
-        
+            self.setState({
+                    showEndModal: s
+                });
+            
+        } else {
+            
+            self.setState({
+                    showEndModal: s,
+                    stepReveal: r,
+                    stepHider: h,
+                    canvasImage: '',
+                    canvasReveal: false
+                }, () => {
+                    self.makeCardDefault();
+                });
+            
+            
+        }
         
         }
     
@@ -288,12 +310,6 @@ export default class CardBuilder extends React.Component {
         
         var self = this;
         
-        var headline = document.querySelector('#headline-uber-holder');
-        var canvas = document.getElementById('card-maker');
-        var context = canvas.getContext('2d');
-        var html_container = document.querySelector('#headline-uber-holder');
-        var html = html_container.innerHTML;
-        
         domtoimage.toJpeg(document.getElementById('card-maker-holder'), { quality: 1 })
             .then(function (dataUrl) {
                 var link = document.getElementById('downloader-hidden');
@@ -331,11 +347,13 @@ export default class CardBuilder extends React.Component {
                         <canvas id="card-maker">
 
                         </canvas>
-                        <Draggable>
-                        <div id="headline-uber-holder">
+                        <Draggable
+                        bounds="parent"
+                        >
+
                             <div className="headline" id="headline-holder">
                             </div>
-                        </div>
+
                         </Draggable>
                     </div>
                     <div className="spacer"></div>
