@@ -12,13 +12,13 @@ import Slider from './components/Slider'
 window.React = React
     
 render(
-    < Heading />,
+    <Heading/>,
     document.getElementById('head-container')
 );
 
 
 render(
-    < Intro />,
+    <Intro/>,
     document.getElementById('intro-container')
     );
 

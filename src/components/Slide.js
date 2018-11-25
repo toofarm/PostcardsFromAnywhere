@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 
 export default class Slide extends Component {
     
-    constructor(props) {
-        
+    constructor(props) {      
         super(props);
         
         this.state = {
             slideNum: 1
-        }
-        
+        }     
     }
 
     render() {
@@ -30,29 +28,22 @@ export default class Slide extends Component {
     
     }
     
-    componentDidMount = () => {
+    componentDidMount() {
 
             setInterval(function () {
-
                 if (this.state.slideNum === 3) {
 
                     this.setState({
-
                         slideNum: this.state.slideNum - 2
-
                     })
-
 
                 } else {
 
                     this.setState({
-
                         slideNum: this.state.slideNum + 1
-
                     })
 
                 }
-
             }.bind(this), 9000);
 
     }

@@ -38,51 +38,48 @@ export default class ModalMaker extends React.Component {
 
 
     render() {
-
-        return ( <
-            div >
+        return ( 
+        <div>
             <div
             className="trig"
             onClick = {
                 this.open.bind(this)
-            } >
-            About <
-            /div>
+            }>
+                About 
+            </div>
 
-            <
-            Modal show = {
+            <Modal show = {
                 this.state.showModal
             }
             onHide = {
                 this.close
             } >
-            <
-            Modal.Header closeButton >
-            <
-            Modal.Title > Postcards From Anywhere < /Modal.Title> <
-            /Modal.Header> <
-            Modal.Body >
-            <
-            h4 > Make your own custom postcards < /h4> <
-            p > Postcards From Anywhere is a web application that allows you to make custom postcards using the Google Street View API. To make a postcard:</p>
-                <p>- Select a location</p>
-                <p>- Write your custom message</p>
-                <p>- Download the results and print</p>
-                    
-            <p>The application is free to use. Enjoy!</p>
-                
-            <p><span className="credit">Developed by <a href="http://shanemadethat.com/" target="_blank">Shane Danaher</a></span>< /p>
-
-           <
-            /Modal.Body> <
-            Modal.Footer >
-            <
-            Button onClick = {
-                this.close
-            } > Close < /Button> <
-            /Modal.Footer> <
-            /Modal> <
-            /div>
+                <Modal.Header closeButton >
+                    <Modal.Title> Postcards From Anywhere </Modal.Title> 
+                </Modal.Header> 
+                <Modal.Body >
+                    <h4> Make your own custom postcards </h4> 
+                    <p> Postcards From Anywhere is a web application that allows you to make custom postcards using the Google Street View API. To make a postcard:
+                    </p>
+                        <p>- Select a location</p>
+                        <p>- Write your custom message</p>
+                        <p>- Download the results and print</p>
+                            
+                    <p>The application is free to use. Enjoy!</p>
+                        
+                    <p>
+                        <span className="credit">Developed by <a href="http://shanemadethat.com/" target="_blank">Shane Danaher</a></span>
+                    </p>
+            </Modal.Body> 
+            <Modal.Footer >
+                <Button onClick = {
+                    this.close
+                } > 
+                    Close 
+                </Button> 
+            </Modal.Footer> 
+            </Modal> 
+        </div>
 
         );
     }

@@ -33,11 +33,9 @@ export default class StepThree extends React.Component {
 
         return (
 
-            <
-            div className = {
+            <div className = {
                 this.props.stepHider > 3 ? "show-me" : "hide-me"
-            }
-             >
+            }>
             <form className="card-form">
             <div className="form-group">
                 <a id="download" target="_blank">

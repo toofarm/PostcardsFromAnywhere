@@ -16,38 +16,62 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jpg'],
         alias: {
-        // bind version of jquery-ui
-          "jquery-ui": "jquery-ui/jquery-ui.js",      
-          // bind to modules;
-          modules: path.join(__dirname, "node_modules"),
+            // bind version of jquery-ui
+            "jquery-ui": "jquery-ui/jquery-ui.js",
+            // bind to modules;
+            modules: path.join(__dirname, "node_modules"),
         }
     },
     plugins: [
         new webpack.ProvidePlugin({
             "React": "react",
         }),
+        new webpack.ProvidePlugin({
+            "$": "jquery",
+            "jQuery": "jquery",
+            "window.jQuery": "jquery"
+        }),
     ],
     module: {
         loaders: [
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}, 
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader'
+            },
             {
                 test: /\.(png|jpg|gif)$/,
                 use: [
-              {
-                loader: 'file-loader',
-                options: {}  
+                    {
+                        loader: 'file-loader',
+                        options: {}
               }
             ]
             },
+            { 
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
+                loader: 'url-loader?limit=100000' 
+            },
             {
-            rules: [{
-            test: /\.scss$/,
-            use: [{
-                loader: "style-loader" // creates style nodes from JS strings 
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader"
+                    }
+                    ]
+            },
+            {
+                rules: [{
+                    test: /\.scss$/,
+                    use: [{
+                            loader: "style-loader" // creates style nodes from JS strings 
             }, {
-                loader: "css-loader" // translates CSS into CommonJS 
+                            loader: "css-loader" // translates CSS into CommonJS 
             }, {
-                loader: "sass-loader" // compiles Sass to CSS 
+                            loader: "sass-loader" // compiles Sass to CSS 
             },
             ]
         }]

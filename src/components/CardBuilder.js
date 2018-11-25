@@ -8,6 +8,7 @@ import StepFour from './StepFour'
 import EndModal from './EndModal'
 import axios from 'axios'
 import domtoimage from 'dom-to-image'
+import Draggable, {DraggableCore} from 'react-draggable'
 
 export default class CardBuilder extends React.Component {
     
@@ -23,6 +24,7 @@ export default class CardBuilder extends React.Component {
             showEndModal: false
         }
         
+        this.makeCardDefault = this.makeCardDefault.bind(this);
         this.getLocation = this.getLocation.bind(this);
         this.addStep = this.addStep.bind(this);
         this.addStepThree = this.addStepThree.bind(this);
@@ -37,9 +39,11 @@ export default class CardBuilder extends React.Component {
     
     }
     
-    componentDidMount = () => {
+    makeCardDefault() {
         
         var self = this;
+        
+        document.getElementById('headline-holder').innerHTML = '';
         
         var canvas = document.querySelector('#card-maker');
         var ctx = canvas.getContext('2d');
@@ -87,6 +91,14 @@ export default class CardBuilder extends React.Component {
         
     }
     
+    componentDidMount() {
+        
+        var self = this;
+        
+        self.makeCardDefault();
+        
+    }
+    
     // Handle accordian behavior
     addStep(s) {
         
@@ -131,20 +143,31 @@ export default class CardBuilder extends React.Component {
         
     }
 
-    //Open end modal
+    //Toggle end modal
     toggleEndModal(s, r, h) {
             
         var self = this;
+        
+        if (self.state.showEndModal === false) {
 
-        self.setState({
-                showEndModal: s,
-                stepReveal: r,
-                stepHider: h
-            }, () => {
-                document.getElementById('location').focus();
-            });
-        
-        
+            self.setState({
+                    showEndModal: s
+                });
+            
+        } else {
+            
+            self.setState({
+                    showEndModal: s,
+                    stepReveal: r,
+                    stepHider: h,
+                    canvasImage: '',
+                    canvasReveal: false
+                }, () => {
+                    self.makeCardDefault();
+                });
+            
+            
+        }
         
         }
     
@@ -158,7 +181,7 @@ export default class CardBuilder extends React.Component {
         var h = w / 1.7;
         var h = h.toFixed();
         
-        var request = 'https://maps.googleapis.com/maps/api/streetview?size=' + w + 'x' + h + '&location=' + l + '&pitch=-0.76&key=AIzaSyB6tttgOrGhz7mgi7FjpWTwMXmyeRhMHoY';
+        var request = 'https://maps.googleapis.com/maps/api/streetview?size=' + w + 'x' + h + '&location=' + l + '&pitch=-0.76&key=AIzaSyAeyVgGtvCgbFMyLn1quTN8e_qdI-iLM2o';
             
             axios.get(request)
               .then(function (response) {
@@ -194,14 +217,6 @@ export default class CardBuilder extends React.Component {
     
     // Write text to front of card
     writeHeadline(t, f, c, p) {
-                
-                if ( p === "Top" ) {
-                    p = "-230%";
-                } else if ( p === "Bottom" ) {
-                    p = "120%";
-                } else {
-                    p = "-50%";
-                }
 
                 var headline = document.querySelector('.headline');
 
@@ -209,7 +224,6 @@ export default class CardBuilder extends React.Component {
                     headline.innerHTML = t;
                     headline.style.fontFamily = f;
                     headline.style.color = c;
-                    headline.style.transform = "translate(-50%," + p + ")";
                 }
 
                 headlinePreview();
@@ -245,7 +259,7 @@ export default class CardBuilder extends React.Component {
                 canvas.style.width ='100%';
                 canvas.style.height='100%';
                 // ...then set the internal size to match
-                canvas.width  = canvas.offsetWidth;
+                canvas.width  = canvas.offsetWidth + 55;
                 canvas.height = canvas.offsetHeight;
             }
             
@@ -295,12 +309,6 @@ export default class CardBuilder extends React.Component {
         
         var self = this;
         
-        var headline = document.querySelector('#headline-uber-holder');
-        var canvas = document.getElementById('card-maker');
-        var context = canvas.getContext('2d');
-        var html_container = document.querySelector('#headline-uber-holder');
-        var html = html_container.innerHTML;
-        
         domtoimage.toJpeg(document.getElementById('card-maker-holder'), { quality: 1 })
             .then(function (dataUrl) {
                 var link = document.getElementById('downloader-hidden');
@@ -329,77 +337,78 @@ export default class CardBuilder extends React.Component {
             
             <div className="ui-holder container-fluid">
             
-            <div className="row canvas-shell">
-            
-                <div className="col-lg-6 col-lg-push-1">
-                    <div id="card-maker-holder" className="canvas" style={{"position": 
-                    this.state.canvasReveal === true ? "relative" : "fixed"     
-                    }}>
-                        <canvas id="card-maker">
+                <div className="row canvas-shell">
+                
+                    <div className="col-lg-6 col-lg-push-1">
+                        <div id="card-maker-holder" className="canvas" style={{"position": 
+                        this.state.canvasReveal === true ? "relative" : "fixed"     
+                        }}>
+                            <canvas id="card-maker">
 
-                        </canvas>
-                        <div id="headline-uber-holder">
-                            <div className="headline" id="headline-holder">
-                            </div>
+                            </canvas>
+                            <Draggable
+                            bounds="parent"
+                            >
+                                <div className="headline" id="headline-holder">
+                                </div>
+                            </Draggable>
+                        </div>
+                        <div className="spacer"></div>
+                        <div id="back-maker-holder" className="canvas2" style={{"display": 
+                        this.state.canvasReveal === true ? "block" : "none"     
+                        }}>
+                            <canvas id="back-maker">
+                
+                            </canvas>
+                            <div id="name" className="recipient"></div>
+                            <div id="address" className="recipient"></div>
+                            <ul id="address-ln2" className="recipient">
+                                    <li id="city-field"></li>
+                                    <li id="state-field"></li>
+                                    <li id="zip-field"></li>
+                            </ul>
                         </div>
                     </div>
-                    <div className="spacer"></div>
-                    <div id="back-maker-holder" className="canvas2" style={{"display": 
-                    this.state.canvasReveal === true ? "block" : "none"     
-                    }}>
-                        <canvas id="back-maker">
-            
-                        </canvas>
-                        <div id="name" className="recipient"></div>
-                        <div id="address" className="recipient"></div>
-                        <ul id="address-ln2" className="recipient">
-                                <li id="city-field"></li>
-                                <li id="state-field"></li>
-                                <li id="zip-field"></li>
-                        </ul>
-                    </div>
-                </div>
-            
-                <div className="ui-column col-lg-4 col-lg-push-1">
-            
-                    <StepOne stepReveal={this.state.stepReveal} sendLocation={this.getLocation} stepExpand={this.stepExpand} />
-            
-                    <StepTwo 
-                        stepReveal={this.state.stepReveal} 
-                        stepHider={this.state.stepHider}
-                        headWriter = {this.writeHeadline}
-                        stepExpand={this.stepExpand}
-                        addStepThree={this.addStepThree}
-                    />
-            
-                   <StepThree 
-                        stepReveal={this.state.stepReveal} 
-                        stepHider={this.state.stepHider}
-                        stepExpand={this.stepExpand}
-                        writeAddress={this.writeAddress}
-                        addStepFour={this.addStepFour}
+                
+                    <div className="ui-column col-lg-4 col-lg-push-1">
+                
+                        <StepOne stepReveal={this.state.stepReveal} sendLocation={this.getLocation} stepExpand={this.stepExpand} />
+                
+                        <StepTwo 
+                            stepReveal={this.state.stepReveal} 
+                            stepHider={this.state.stepHider}
+                            headWriter = {this.writeHeadline}
+                            stepExpand={this.stepExpand}
+                            addStepThree={this.addStepThree}
                         />
-            
-                    <StepFour 
-                        stepHider={this.state.stepHider}
-                        stepReveal={this.state.stepReveal}
-                        downloadCard={this.downloadCard}
-                    />
-            
-                    <EndModal 
-                        showEndModal={this.state.showEndModal}
-                        closeEndModal={this.toggleEndModal}
-                        stepExpand={this.stepExpand}
-                        addStep={this.addStep}
-                    />
-            
-                    <a id="downloader-hidden">Download</a>
+                
+                    <StepThree 
+                            stepReveal={this.state.stepReveal} 
+                            stepHider={this.state.stepHider}
+                            stepExpand={this.stepExpand}
+                            writeAddress={this.writeAddress}
+                            addStepFour={this.addStepFour}
+                            />
+                
+                        <StepFour 
+                            stepHider={this.state.stepHider}
+                            stepReveal={this.state.stepReveal}
+                            downloadCard={this.downloadCard}
+                        />
+                
+                        <EndModal 
+                            showEndModal={this.state.showEndModal}
+                            closeEndModal={this.toggleEndModal}
+                            stepExpand={this.stepExpand}
+                            addStep={this.addStep}
+                        />
+                
+                        <a id="downloader-hidden">Download</a>
 
+                    </div>
+            
                 </div>
-        
-            </div>
-            
-            
+
             </div>
         
         )

@@ -352,6 +352,7 @@ nav {
         width: 100%;
         max-width: 640px;
         position: fixed;
+        overflow: hidden;
     }
     .canvas2 {
         @extend .canvas;
@@ -364,6 +365,20 @@ nav {
     color: #666;
     margin: 15px 0;
     font-size: 18px;
+}
+
+.position-txt {
+    @extend .instructions;
+    font-style: italic;
+    margin-top: 0;
+    font-size: 17px;
+}
+
+#card-maker-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
 }
 
 #card-maker {
@@ -511,11 +526,12 @@ nav {
     color: #fff;
     display: inline-block;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
+//    top: 50%;
+//    left: 50%;
+    max-width: 70%;
+//    transform: translate(-50%, -50%);
     text-align: center;
+    overflow: hidden;
 }
 
 

@@ -110,8 +110,7 @@ export default class StepThree extends React.Component {
 
         return (
 
-            <
-            div className = {
+            <div className = {
                 this.props.stepHider > 2 ? this.props.stepReveal === 3 ? "step-two show-me" : "step-two step-close" : "step-two hide-me"
             }
             onClick = {
@@ -120,37 +119,25 @@ export default class StepThree extends React.Component {
                 }
             } >
 
-            <
-            h3 > Step 3: Choose a recipient < /h3>
+            <h3> Step 3: Choose recipient </h3>
 
-            <
-            div className = "instructions" >
-            Write the name and address of the person who you want to receive your postcard. If you want to write an address by hand, just leave this part blank. <
-            /div>
+            <div className = "instructions" >
+            Write the name and address of the person who you want to receive your postcard. If you want to write an address by hand, just leave this part blank. </div>
 
-            <
-            form className = "card-form"
-            >
-            <
-            div className = "form-group"
-             >
-            <
-            label htmlFor = "name"
-            className = "form-label" > Name < /label> <
-            input className = "form-control"
+            <form className = "card-form">
+            <div className = "form-group">
+            <label htmlFor = "name"
+            className = "form-label"> Name </label> 
+            <input className = "form-control"
             id = "name" 
             onChange = { this.updateName
-            } /> <
-            /div>
-            <
-            div className = "form-group" >
-            <
-            label htmlFor = "address1"
-            className = "form-label" > Address < /label> 
+            } /> </div>
+            <div className = "form-group">
+            <label htmlFor = "address1"
+            className = "form-label" > Address </label> 
                 <input className="form-control" id="address1" onChange = { this.updateAddress
             } />
-            <
-            /div>
+            </div>
             <div className="form-group">
                 <label htmlFor="city" className="form-label">City</label>
                 <input className="form-control" id="city" onChange = { this.updateCity
