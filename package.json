@@ -31,12 +31,15 @@
     "webpack": "^3.9.1",
     "webpack-dev-server": "^2.9.4"
   },
+<<<<<<< HEAD
   "babel": {
     "presets": [
         "es2015",
         "react"
       ]
   },
+=======
+>>>>>>> 81f8974fd738fca4105e3f52ea6ac635b6209241
   "dependencies": {
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",

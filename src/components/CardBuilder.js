@@ -91,7 +91,11 @@ export default class CardBuilder extends React.Component {
         
     }
     
+<<<<<<< HEAD
     componentDidMount() {
+=======
+    componentDidMount = () => {
+>>>>>>> 81f8974fd738fca4105e3f52ea6ac635b6209241
         
         var self = this;
         
@@ -217,6 +221,10 @@ export default class CardBuilder extends React.Component {
     
     // Write text to front of card
     writeHeadline(t, f, c, p) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 81f8974fd738fca4105e3f52ea6ac635b6209241
 
                 var headline = document.querySelector('.headline');
 
@@ -345,6 +353,7 @@ export default class CardBuilder extends React.Component {
                         }}>
                             <canvas id="card-maker">
 
+<<<<<<< HEAD
                             </canvas>
                             <Draggable
                             bounds="parent"
@@ -368,6 +377,17 @@ export default class CardBuilder extends React.Component {
                                     <li id="zip-field"></li>
                             </ul>
                         </div>
+=======
+                        </canvas>
+                        <Draggable
+                        bounds="parent"
+                        >
+
+                            <div className="headline" id="headline-holder">
+                            </div>
+
+                        </Draggable>
+>>>>>>> 81f8974fd738fca4105e3f52ea6ac635b6209241
                     </div>
                 
                     <div className="ui-column col-lg-4 col-lg-push-1">
