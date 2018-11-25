@@ -25,12 +25,7 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({
             "React": "react",
-        }),
-        new webpack.ProvidePlugin({
-            "$": "jquery",
-            "jQuery": "jquery",
-            "window.jQuery": "jquery"
-        }),
+        })
     ],
     module: {
         loaders: [
