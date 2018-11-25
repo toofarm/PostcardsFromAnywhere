@@ -91,11 +91,7 @@ export default class CardBuilder extends React.Component {
         
     }
     
-<<<<<<< HEAD
     componentDidMount() {
-=======
-    componentDidMount = () => {
->>>>>>> 81f8974fd738fca4105e3f52ea6ac635b6209241
         
         var self = this;
         
@@ -185,7 +181,7 @@ export default class CardBuilder extends React.Component {
         var h = w / 1.7;
         var h = h.toFixed();
         
-        var request = 'https://maps.googleapis.com/maps/api/streetview?size=' + w + 'x' + h + '&location=' + l + '&pitch=-0.76&key=AIzaSyAeyVgGtvCgbFMyLn1quTN8e_qdI-iLM2o';
+        var request = 'https://maps.googleapis.com/maps/api/streetview?size=' + w + 'x' + h + '&location=' + l + '&pitch=-0.76&key=[API-KEY]';
             
             axios.get(request)
               .then(function (response) {
@@ -221,10 +217,6 @@ export default class CardBuilder extends React.Component {
     
     // Write text to front of card
     writeHeadline(t, f, c, p) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 81f8974fd738fca4105e3f52ea6ac635b6209241
 
                 var headline = document.querySelector('.headline');
 
@@ -352,8 +344,6 @@ export default class CardBuilder extends React.Component {
                         this.state.canvasReveal === true ? "relative" : "fixed"     
                         }}>
                             <canvas id="card-maker">
-
-<<<<<<< HEAD
                             </canvas>
                             <Draggable
                             bounds="parent"
@@ -377,7 +367,6 @@ export default class CardBuilder extends React.Component {
                                     <li id="zip-field"></li>
                             </ul>
                         </div>
-=======
                         </canvas>
                         <Draggable
                         bounds="parent"
@@ -387,7 +376,6 @@ export default class CardBuilder extends React.Component {
                             </div>
 
                         </Draggable>
->>>>>>> 81f8974fd738fca4105e3f52ea6ac635b6209241
                     </div>
                 
                     <div className="ui-column col-lg-4 col-lg-push-1">
