@@ -40,7 +40,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.1.2",
     "dom-to-image": "^2.6.0",
     "follow-redirects": "^1.2.6",
     "font-awesome": "^4.7.0",
